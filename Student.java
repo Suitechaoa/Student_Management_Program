@@ -9,22 +9,48 @@ public class Student implements Comparable<Student> {
         private String major;
         private double gpa;
 
+        ////////////////
+        /// Override methods
+        ////////////////
+
         @Override
         public int compareTo(Student other){
             return this.name.compareTo(other.name);
         }
 
+         // override toString() method to display student information
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", major='" + major + '\'' +
+                    ", gpa=" + gpa +
+                    '}';
+        }
+
+        ////////////////
+        /// Constructors
+        ////////////////
+        
+        // Constructor with all fields
         public Student(int id, String name, String major, double gpa) {
             this.id = id;
             this.name = name;
             this.major = major;
             this.gpa = gpa;
         }
+
+        // Constructor without id
         public Student(String name, String major, double gpa) {
             this.name = name;
             this.major = major;
             this.gpa = gpa;
         }
+
+        /////////////
+        /// Getters and Setters
+        /////////////
 
         public int getId() {
             return id;
@@ -58,16 +84,7 @@ public class Student implements Comparable<Student> {
             this.gpa = gpa;
         }
 
-        // override toString() method to display student information
-        @Override
-        public String toString() {
-            return "Student{" +
-                    "id=" + id +
-                    ", name='" + name + '\'' +
-                    ", major='" + major + '\'' +
-                    ", gpa=" + gpa +
-                    '}';
-        }
+
 
 
 
