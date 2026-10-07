@@ -29,6 +29,16 @@ public class Student implements Comparable<Student> {
                     '}';
         }
 
+        // Override equals() method to compare students based on their id
+        @Override 
+        public boolean equals(Object other){
+            if (this == other) return true;
+            if (other == null || getClass() != other.getClass()) return false;
+            Student student = (Student) other;
+            return id == student.id;
+
+        }
+
         ////////////////
         /// Constructors
         ////////////////
