@@ -3,6 +3,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Student implements Comparable<Student> {
 
@@ -145,6 +147,21 @@ public class Student implements Comparable<Student> {
             System.out.println("\n");
         }
 
+        //////////////
+        /// Filtering methods
+        /////////////////
+        
+        public static void cullStudents(List<Student> list, double gpaThreshold){
+            
+            Iterator<Student> iterator = list.iterator();
+            while (iterator.hasNext()) {
+                Student student = iterator.next();
+                if (student.getGpa() < gpaThreshold) {
+                    iterator.remove();
+                }
+            }
+        }
+
 
 
 
@@ -153,11 +170,11 @@ public class Student implements Comparable<Student> {
         List<Student> list = new ArrayList<>();
         list.add(new Student(1, "John", "Computer Science", 3.2));
         list.add(new Student(2, "Jane", "Mathematics", 3.8));
-        list.add(new Student(3, "Kristian", "Physics", 3.9));
+        list.add(new Student(3, "Kristian", "Physics", 2.2));
         list.add(new Student(4, "Ryan", "Biology", 3.1));
         list.add(new Student(5, "George", "Chemistry", 3.7));
         list.add(new Student(6, "Alice", "Psychology", 3.5));
-        list.add(new Student(7,"Stooge", "Philosophy", 3.0));
+        list.add(new Student(7,"Stooge", "Philosophy", 1.6));
         //System.out.println("Student ID: " + list.get(4).getId());
 
 
@@ -207,6 +224,47 @@ public class Student implements Comparable<Student> {
         list.sort(list.get(0).compareByID);
         System.out.println("After sorting by ID");
         Student.displayStudentBody(list);
+
+        //////////////////
+        /// Section G
+        //////////////////
+
+        // Filtering with an iterator
+
+        System.out.println("Section G - Filtering");
+        System.out.println("Filtering students with GPA lower than 2.5\n");
+        System.out.println("Before filtering");
+        Student.displayStudentBody(list);
+        Student.cullStudents(list, 2.5);
+        System.out.println("After filtering");
+        Student.displayStudentBody(list);
+
+        /////////////////////////
+        /// Section H
+        /////////////////////////
+        
+        // Working with Set and HashSet
+        System.out.println("Section H - Working with Set and HashSet");
+
+        Set<Student> studentSet = new HashSet<>(list);
+        
+        // Generating Studnets to add to the set
+        Student student1 = new Student(1, "Bob", "Engineering", 3.0);
+        Student student2 = new Student(2, "Alice", "Psychology", 3.5); 
+        Student student3 = new Student(3, "Charlie", "History", 2.8);
+        Student student4 = new Student(3, "David", "Biology", 3.2);  // Duplicate ID
+
+        studentSet.add(student1);
+        studentSet.add(student2);
+        studentSet.add(student3);
+
+        System.out.println("Before adding duplicate student with ID 3");
+        for (Student student : studentSet) {
+            System.out.println(student);
+        }
+
+        
+
 
 
 
