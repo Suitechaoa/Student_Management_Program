@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Comparator;
 
 public class Student implements Comparable<Student> {
 
@@ -45,6 +46,25 @@ public class Student implements Comparable<Student> {
         public int hashCode() {
             return Integer.hashCode(id);
         }
+
+        ////////////////
+        /// Comparators
+        /////////////////
+        
+        Comparator<Student> compareByGpa = new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                return Double.compare(s1.getGpa(), s2.getGpa());
+            }
+        };
+
+        Comparator<Student> compareByID = new Comparator<Student>(){
+            
+            @Override 
+            public int compare(Student s1, Student s2){
+                return Integer.compare(s1.getId(), s2.getId());
+            }
+        };
 
         ////////////////
         /// Constructors
@@ -166,5 +186,32 @@ public class Student implements Comparable<Student> {
 		Student.displayStudentBody(list);
         Student.displayStudentBodyIterator(list);
         Student.displayStudentBodyLambda(list);
+
+        ////////////////////////
+        /// Section F
+        /////////////////////////
+        
+        // Sort the list by GPA using the compareByGpa comparator
+        System.out.println("Section F - Sorting");
+        System.out.println("Sorting by GPA\n");
+        System.out.println("Before sorting by GPA");
+        Student.displayStudentBody(list);
+        list.sort(list.get(0).compareByGpa);
+        System.out.println("After sorting by GPA");
+        Student.displayStudentBody(list);
+
+        // Sort the list by ID using the compareByID comparator
+        System.out.println("Sorting by ID\n");
+        System.out.println("Before sorting by ID");
+        Student.displayStudentBody(list);
+        list.sort(list.get(0).compareByID);
+        System.out.println("After sorting by ID");
+        Student.displayStudentBody(list);
+
+
+
+
+
+
     }
 }
