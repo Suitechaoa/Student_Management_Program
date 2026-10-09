@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Iterator;
 
 public class Student implements Comparable<Student> {
 
@@ -37,6 +38,12 @@ public class Student implements Comparable<Student> {
             Student student = (Student) other;
             return id == student.id;
 
+        }
+
+        // Override hashCode() method to ensure that equal objects have the same hash code based on their id.
+        @Override
+        public int hashCode() {
+            return Integer.hashCode(id);
         }
 
         ////////////////
@@ -94,22 +101,70 @@ public class Student implements Comparable<Student> {
             this.gpa = gpa;
         }
 
+        ///////////////
+        /// Traversal methods
+        //////////////////
+
+        public static void displayStudentBody(List<Student> list) {
+            for (Student student : list) {
+                System.out.println(student);
+            }
+            System.out.println("\n");
+        }
+
+        public static void displayStudentBodyIterator(List<Student> list) {
+            Iterator<Student> iterator = list.iterator();
+            while (iterator.hasNext()) {
+                System.out.println(iterator.next());
+            }
+            System.out.println("\n");
+        }
+
+        public static void displayStudentBodyLambda(List<Student> list) {
+            list.forEach(student -> System.out.println(student));
+            System.out.println("\n");
+        }
+
 
 
 
 
     public static void main(String[] args) {
         List<Student> list = new ArrayList<>();
-        list.add(new Student("Landon", "Newton", 3.25));
-        list.add(new Student("Valentina", "Carter", 3.5));
-        list.add(new Student("Kristian", "Saunders", 3.9));
-        list.add(new Student("Ryan", "Robles", 3.1));
+        list.add(new Student(1, "John", "Computer Science", 3.2));
+        list.add(new Student(2, "Jane", "Mathematics", 3.8));
+        list.add(new Student(3, "Kristian", "Physics", 3.9));
+        list.add(new Student(4, "Ryan", "Biology", 3.1));
+        list.add(new Student(5, "George", "Chemistry", 3.7));
+        list.add(new Student(6, "Alice", "Psychology", 3.5));
+        list.add(new Student(7,"Stooge", "Philosophy", 3.0));
+        //System.out.println("Student ID: " + list.get(4).getId());
+
+
+
 		System.out.println("=== Original ordering ===");
-        for (Student student : list)
-			System.out.println(student);
+        Student.displayStudentBody(list);
+
+        ////////////////////
+        /// Section D
+        //////////////////////
+
+        System.out.println("Section D - Remove and Contains");
+        System.out.println("What is the size of the list before removal? :" + list.size());
+        list.remove(5);
+        System.out.println("Does the list contain the student with ID 7? :" + list.contains(new Student(7,"Stooge", "Philosophy", 3.0)));
+        System.out.println("What is the size of the list after removal? :" + list.size());
+        System.out.println("Just to be sure, is the list empty? :" + list.isEmpty());
 		Collections.sort(list);
-		System.out.println("=== Sorted list ===");
-        for (Student student : list)
-			System.out.println(student);
+
+        ///////////////////
+        /// Section E
+        ///////////////////////
+        System.out.println("\n");
+
+        System.out.println("Section E - Traversal Methods");
+		Student.displayStudentBody(list);
+        Student.displayStudentBodyIterator(list);
+        Student.displayStudentBodyLambda(list);
     }
 }
